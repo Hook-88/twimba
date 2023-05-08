@@ -55,16 +55,14 @@ function handleReplyClick(replyId){
 
 
 function handleReplyTweetClick(replyTweetId) {
-    document.getElementById(`reply-tweet-${replyTweetId}`).classList.toggle('hidden')
-    document.getElementById(`reply-tweet-icon-${replyTweetId}`).classList.toggle('active')
-    
+
+    toggleTweetReplyVisibility(replyTweetId)
+
     const tweetInput = document.getElementById(`reply-tweet-input-${replyTweetId}`)
-    const replyBtn = document.getElementById(`reply-btn-${replyTweetId}`)
     
-    replyBtn.addEventListener('click', function() {
-        const targetTweetObj = tweetsData.filter(function(tweet){
-            return tweet.uuid === replyTweetId
-        })[0]
+    document.getElementById(`reply-btn-${replyTweetId}`).addEventListener('click', function() {
+        
+        const targetTweetObj = getTargetTweetObj(replyTweetId)
 
         targetTweetObj.replies.push({
                 handle: `@Scrimba`,
@@ -74,8 +72,18 @@ function handleReplyTweetClick(replyTweetId) {
         })
         render()
         document.getElementById(`replies-${replyTweetId}`).classList.toggle('hidden')
-
     })
+}
+
+function toggleTweetReplyVisibility(id) {
+    document.getElementById(`reply-tweet-${id}`).classList.toggle('hidden')
+    document.getElementById(`reply-tweet-icon-${id}`).classList.toggle('active')
+}
+
+function getTargetTweetObj(id) {
+    return tweetsData.filter(function(tweet){
+        return tweet.uuid === id
+    })[0]
 }
 
 function handleTweetBtnClick(){
@@ -99,9 +107,7 @@ function handleTweetBtnClick(){
 
 }
 
-function handleReplyTweetBtn() {
-    
-}
+
 
 function getFeedHtml(){
     let feedHtml = ``
