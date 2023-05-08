@@ -60,7 +60,19 @@ function handleReplyTweetClick(replyTweetId) {
     const replyBtn = document.getElementById(`reply-btn-${replyTweetId}`)
     
     replyBtn.addEventListener('click', function() {
-        console.log(tweetInput.value)
+        const targetTweetObj = tweetsData.filter(function(tweet){
+            return tweet.uuid === replyTweetId
+        })[0]
+
+        targetTweetObj.replies.push({
+                handle: `@Scrimba`,
+                profilePic: `images/scrimbalogo.png`,
+                tweetText: tweetInput.value,
+        
+        })
+        render()
+        document.getElementById(`replies-${replyTweetId}`).classList.toggle('hidden')
+
     })
 }
 
