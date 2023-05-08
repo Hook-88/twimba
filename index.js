@@ -5,6 +5,7 @@ document.addEventListener('click', function(e){
     if(e.target.dataset.like){
        handleLikeClick(e.target.dataset.like) 
     }
+    
     else if(e.target.dataset.retweet){
         handleRetweetClick(e.target.dataset.retweet)
     }
@@ -13,7 +14,10 @@ document.addEventListener('click', function(e){
     }
     else if(e.target.id === 'tweet-btn'){
         handleTweetBtnClick()
-    }
+    } else if(e.target.dataset.replyTweet){
+        handleReplyTweetClick(e.target.dataset.replyTweet)
+    } 
+    
 })
  
 function handleLikeClick(tweetId){ 
@@ -48,6 +52,10 @@ function handleRetweetClick(tweetId){
 
 function handleReplyClick(replyId){
     document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
+}
+
+function handleReplyTweetClick(replyTweetId) {
+    document.getElementById(`reply-tweet-${replyTweetId}`).classList.toggle('hidden')
 }
 
 function handleTweetBtnClick(){
@@ -133,9 +141,22 @@ function getFeedHtml(){
                     ></i>
                     ${tweet.retweets}
                 </span>
+                <span class="tweet-detail">
+                <i class="fa-solid fa-reply"
+                data-reply-tweet="${tweet.uuid}"
+                ></i>
+                </span>
+
             </div>   
         </div>            
     </div>
+    <div class="hidden" id="reply-tweet-${tweet.uuid}">
+        <div class="tweet-input-area">
+            <img src="images/scrimbalogo.png" class="profile-pic">
+            <textarea placeholder="Reply to Tweet" id="reply-tweet-input-${tweet.uuid}"></textarea>
+        </div>
+        <button>Reply</button>
+    </div>  
     <div class="hidden" id="replies-${tweet.uuid}">
         ${repliesHtml}
     </div>   
