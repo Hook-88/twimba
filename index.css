@@ -130,3 +130,7 @@ button{
 .hidden{
     display: none;
 }
+
+.active{
+    color: #0F8CDF;
+}

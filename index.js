@@ -53,8 +53,10 @@ function handleReplyClick(replyId){
     document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
 }
 
+
 function handleReplyTweetClick(replyTweetId) {
     document.getElementById(`reply-tweet-${replyTweetId}`).classList.toggle('hidden')
+    document.getElementById(`reply-tweet-icon-${replyTweetId}`).classList.toggle('active')
     
     const tweetInput = document.getElementById(`reply-tweet-input-${replyTweetId}`)
     const replyBtn = document.getElementById(`reply-btn-${replyTweetId}`)
@@ -162,7 +164,7 @@ function getFeedHtml(){
                 <span class="tweet-detail">
                 <i class="fa-solid fa-reply"
                 data-reply-tweet="${tweet.uuid}"
-                ></i>
+                id="reply-tweet-icon-${tweet.uuid}"></i>
                 </span>
 
             </div>   
